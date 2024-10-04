@@ -1,0 +1,7 @@
+{
+  "name": "crashApp_Ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
