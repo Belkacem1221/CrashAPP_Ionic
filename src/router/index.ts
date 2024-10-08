@@ -1,3 +1,4 @@
+import GeolocationPage from '@/views/GeolocationPage.vue';
 import LoginPage from '@/views/LoginPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
 import { createRouter, createWebHistory } from '@ionic/vue-router';
@@ -17,6 +18,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/signUp',
     name: 'SignUp',
     component: SignUpPage
+  },
+  {
+    path: '/geolocation',
+    name: 'Geolocation',
+    component: GeolocationPage
   }
 ]
 
