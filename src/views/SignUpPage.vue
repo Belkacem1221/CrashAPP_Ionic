@@ -18,13 +18,24 @@
                 </IonCardContent>
             </IonCard>
         </IonContent>
+
+        <IonAlert
+            :is-open = "isOpen"
+            header="Fill the fields properly"
+            :message= "messageAlert"
+            :buttons="alertBtn"
+            @didDismiss="() => setOpen(false)"
+        ></IonAlert>
     </IonPage>
 </template>
 
 <script setup lang="ts">
-    import { IonCard, IonCardContent, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton } from '@ionic/vue';
+    import { IonAlert, IonCard, IonCardContent, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton } from '@ionic/vue';
     import { useSignUp } from '@/viewmodels/useSignUp';
+    import { useAlert } from '@/viewmodels/useAlert';
 
     const {email, password, firstName, lastName, handleSignUp } = useSignUp()
+    const {isOpen ,setOpen, alertBtn, messageAlert} = useAlert()
+
     
 </script>
