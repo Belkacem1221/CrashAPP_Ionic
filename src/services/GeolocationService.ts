@@ -1,4 +1,3 @@
-// src/services/GeolocationService.ts
 import { Geolocation } from '@capacitor/geolocation';
 
 export const getCurrentPosition = async () => {

@@ -8,7 +8,7 @@
             <IonContent>
                 <IonCard>
                     <IonCardContent>
-                        <form @submit.prevent="handleSubmit">
+                        <form @submit.prevent= "handleLogin">
                             <IonInput v-model="email" class="ion-margin-bottom" label="Email" type="email" label-placement="floating" fill="outline" placeholder="Enter email"></IonInput>
                             <IonInput v-model="password" class="ion-margin-bottom" label="Password" type="password" label-placement="floating" fill="outline" placeholder="Enter password"></IonInput>
                             <IonButton type="submit" expand="block">Login</IonButton>
@@ -34,6 +34,6 @@
     import { useLogin } from '@/viewmodels/useLogin';
     import { useAlert } from '@/viewmodels/useAlert';
 
-    const {email, password, handleSubmit, navToSignUp} = useLogin()
+    const {email, password, handleLogin, navToSignUp} = useLogin()
     const {isOpen ,setOpen, alertBtn, messageAlert} = useAlert()
 </script>

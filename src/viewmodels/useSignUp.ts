@@ -1,6 +1,7 @@
 import { useIonRouter } from "@ionic/vue";
 import { ref } from "vue";
 import { useAlert } from "./useAlert";
+import { authService } from "@/services/authService";
 
 export function useSignUp(){
     const ionRouter = useIonRouter()
@@ -12,14 +13,17 @@ export function useSignUp(){
 
     const {setOpen} = useAlert()
 
-    const handleSignUp = () => {
+    const handleSignUp = async () => {
         if(!email.value || !password.value || !firstName.value || !lastName.value ){
             setOpen(true, "At least one field empty")
             console.log("fail login")
             return;
         }
-        console.log("submit pressed")
+        
+        const result = await authService.submit(email.value, password.value, firstName.value, lastName.value)
         ionRouter.back()
+        console.log("SignUp successed", result)
+
     }
 
     return{

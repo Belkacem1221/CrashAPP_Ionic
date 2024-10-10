@@ -10,20 +10,16 @@ export function useLogin(){
 
     const {setOpen} = useAlert()
 
-    const handleSubmit = () => {
+    const handleLogin = async () => {
         if(!email.value || !password.value ){
             setOpen(true, "At least one field empty")
             console.log("fail login")
             return;
-        } else {
-            authService.login(email.value, password.value)
-            //   .then(() => {
-            //     ionRouter.push('/dashboard'); // Navigate on successful login
-            //   })
-            //   .catch((error) => {
-            //     setOpen(true, 'Login failed, please try again'); // Show error alert
-            //   });
-          }
+        }
+
+        const result = await authService.login(email.value, password.value)
+        console.log("logged", result)    
+          
         
     }
 
@@ -33,7 +29,7 @@ export function useLogin(){
     return{
         email,
         password,
-        handleSubmit,
+        handleLogin,
         navToSignUp
     }
 }
