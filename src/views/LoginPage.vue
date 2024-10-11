@@ -9,8 +9,8 @@
                 <IonCard>
                     <IonCardContent>
                         <form @submit.prevent= "handleLogin">
-                            <IonInput v-model="email" class="ion-margin-bottom" label="Email" type="email" label-placement="floating" fill="outline" placeholder="Enter email"></IonInput>
-                            <IonInput v-model="password" class="ion-margin-bottom" label="Password" type="password" label-placement="floating" fill="outline" placeholder="Enter password"></IonInput>
+                            <IonInput v-model="email" class="ion-margin-bottom" label="Email" type="email" label-placement="floating" fill="outline" placeholder="Enter email" required></IonInput>
+                            <IonInput v-model="password" class="ion-margin-bottom" label="Password" type="password" label-placement="floating" fill="outline" placeholder="Enter password" required></IonInput>
                             <IonButton type="submit" expand="block">Login</IonButton>
                             <IonButton expand="block" @click="navToSignUp">Create an account</IonButton>
                         </form>

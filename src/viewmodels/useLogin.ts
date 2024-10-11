@@ -11,11 +11,6 @@
     const { setOpen } = useAlert();
 
     const handleLogin = async () => {
-        if (!email.value || !password.value) {
-            setOpen(true, "At least one field is empty");
-        return;
-        }
-
         try {
             const result = await authService.login(email.value, password.value);
             console.log("Response:", result);
@@ -23,6 +18,8 @@
         } catch (error) {
             console.log("incorrect")
             setOpen(true, "Invalid email or password"); 
+            email.value = ""
+            password.value = ""
         }
     };
 

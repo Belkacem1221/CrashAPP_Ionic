@@ -14,15 +14,14 @@ export function useSignUp(){
     const {setOpen} = useAlert()
 
     const handleSignUp = async () => {
-        if(!email.value || !password.value || !firstName.value || !lastName.value ){
-            setOpen(true, "At least one field empty")
-            console.log("fail login")
-            return;
+        try{
+            const result = await authService.submit(email.value, password.value, firstName.value, lastName.value)
+            ionRouter.back()
+            console.log("SignUp successed", result)
+        }catch(error){
+            setOpen(true, (error as Error).message)
         }
-        
-        const result = await authService.submit(email.value, password.value, firstName.value, lastName.value)
-        ionRouter.back()
-        console.log("SignUp successed", result)
+
 
     }
 

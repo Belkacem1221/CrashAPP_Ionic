@@ -12,7 +12,6 @@ export const authService = {
         if (!response.ok) {
             const errorData = await response.json();    
             console.error("API Error:", errorData);
-            throw new Error(errorData.message || 'Login failed');
         }
 
         const data = await response.json();
