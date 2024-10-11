@@ -3,7 +3,7 @@
     import { ref } from "vue";
     import { useAlert } from "./useAlert";
 
-    export function useLogin() {
+export function useLogin() {
     const ionRouter = useIonRouter();
     const email = ref('');
     const password = ref('');

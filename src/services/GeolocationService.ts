@@ -10,5 +10,4 @@ export const getAddressFromCoordinates = async (latitude: number, longitude: num
       const data = await response.json();
       
       return data.display_name
-      
 }
