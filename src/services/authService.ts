@@ -10,7 +10,8 @@ export const authService = {
             body: JSON.stringify({email, password})
         });
         if (!response.ok) {
-            const errorData = await response.json();
+            const errorData = await response.json();    
+            console.error("API Error:", errorData);
             throw new Error(errorData.message || 'Login failed');
         }
 

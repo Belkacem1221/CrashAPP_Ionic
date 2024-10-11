@@ -2,6 +2,9 @@
     <IonPage>
         <IonHeader>
             <IonToolbar>
+                <IonButtons slot="start">
+                    <IonBackButton></IonBackButton>
+                </IonButtons>
                 <IonTitle>Sign-up</IonTitle>
             </IonToolbar>
         </IonHeader>
@@ -30,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-    import { IonAlert, IonCard, IonCardContent, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton } from '@ionic/vue';
+    import {  IonBackButton,IonButtons,IonAlert, IonCard, IonCardContent, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton } from '@ionic/vue';
     import { useSignUp } from '@/viewmodels/useSignUp';
     import { useAlert } from '@/viewmodels/useAlert';
 

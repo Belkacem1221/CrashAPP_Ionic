@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-    import { IonAlert, IonButton, IonCard, IonCardContent, IonContent, IonHeader, IonInput, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+    import { IonAlert, IonButton,IonCard, IonCardContent, IonContent, IonHeader, IonInput, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
     import { useLogin } from '@/viewmodels/useLogin';
     import { useAlert } from '@/viewmodels/useAlert';
 
