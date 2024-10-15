@@ -1,4 +1,3 @@
-
 export const authService = {
     async login(email: String, password: String){
 
@@ -15,8 +14,11 @@ export const authService = {
         }
 
         const data = await response.json();
+        localStorage.setItem('userId', data.userId);
         return data;
     },
+
+
     async submit(email: string, password: string, firstName: string, lastName: string) {
 
         const response = await fetch("https://server-1-t93s.onrender.com/api/tp/signup", {
@@ -37,7 +39,15 @@ export const authService = {
         console.log('Success:', data);  
 
         return data;
-    }
+    },
+
+    logout() {
+        localStorage.removeItem('userId'); 
+    },
+
+    getLoggedInUserId(): string | null{
+        return localStorage.getItem('userId'); 
+    },
     
 
 }

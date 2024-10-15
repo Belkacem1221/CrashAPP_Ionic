@@ -7,11 +7,17 @@
       </IonHeader>
       <IonContent>
         <IonList>
-          <IonItem @click="navToLogin">
-            <IonLabel>Login</IonLabel>
+          <IonItem @click="navToTrip">
+            <IonButton>My trips</IonButton>
           </IonItem>
-          <IonItem @click="navToSignUp">
-            <IonLabel>Sign Up</IonLabel>
+          <IonItem @click="navToAddTrip">
+            <IonButton>Add trip</IonButton>
+          </IonItem>
+          <IonItem @click="navToSettings">
+            <IonButton>Settings</IonButton>
+          </IonItem>
+          <IonItem @click="navToAppVersion">
+            <IonButton>App Version</IonButton>
           </IonItem>
         </IonList>
       </IonContent>
@@ -19,10 +25,10 @@
   </template>
   
   <script setup lang="ts">
-  import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
+  import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonButton } from '@ionic/vue';
   import { useMenu } from '@/viewmodels/useMenu'; 
   
-  const { navToLogin, navToSignUp} = useMenu();
+  const { navToAddTrip, navToAppVersion, navToSettings, navToTrip} = useMenu();
   </script>
   
   <style scoped>

@@ -3,16 +3,27 @@ import { useIonRouter } from '@ionic/vue';
 export function useMenu() {
   const ionRouter = useIonRouter();
 
-  const navToLogin = () => {
-    ionRouter.push('/login'); 
+
+  const navToTrip = () => {
+    ionRouter.push('/geolocation'); 
   };
 
-  const navToSignUp = () => {
-    ionRouter.push('/SignUp'); 
+  const navToAddTrip = () => {
+    ionRouter.push('/addTrip'); 
+  }; 
+  
+  const navToSettings = () => {
+    ionRouter.push('/settings'); 
+  };
+
+  const navToAppVersion = () => {
+    ionRouter.push('/appVersion'); 
   };
 
   return {
-    navToLogin,
-    navToSignUp
+    navToAddTrip,
+    navToTrip,
+    navToSettings,
+    navToAppVersion
 };
 }

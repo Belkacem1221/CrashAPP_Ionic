@@ -8,31 +8,48 @@
                 <IonTitle>Geolocation</IonTitle>
             </IonToolbar>
         </IonHeader>
+
         <IonContent>
-            <IonTitle class="ion-margin-top ion-text-center">ADDRESS</IonTitle>
-            <IonList :inset="true" v-for="(position, index) in positions" :key="index">
-                <IonItem class="position-details">{{ position[1]}}
-                    <IonButton  @click="toggleDetails(index)">
-                        {{ detailsText[index] || 'Show Details'}}
-                    </IonButton>
-                </IonItem>
-                <IonItem v-if="showDetails[index]" class="position-title">Longitude:  <div class="position-details"> {{ position[0].coords.longitude}}</div></IonItem>
-                <IonItem v-if="showDetails[index]" class="position-title">Latitude: <div class="position-details">{{ position[0].coords.latitude}}</div></IonItem>
+            <IonList>
+                <IonItemDivider>
+                    <IonLabel>My trips</IonLabel>
+                </IonItemDivider>
+
+                <IonList v-if="userTrips.length">
+                    <IonItem v-for="trip in userTrips" :key="trip.id" @click="goToTripDetails(trip)">
+                    <IonLabel>
+                        <h2>{{ trip.name }}</h2>
+                        <p>Positions enregistrées : {{ trip.positionCount }}</p>
+                        <p>Date de création : {{ formatDate(trip.createdAt) }}</p>
+                    </IonLabel>
+                        <IonButton slot="end" @click.stop="deleteTrip(trip.id)">Supprimer</IonButton>
+                    </IonItem>
+                </IonList>
+
+                <IonItemDivider>
+                    <IonLabel>Shared trips</IonLabel>
+                </IonItemDivider>
+
+                <IonList v-if="sharedTrips.length">
+                    <IonItem v-for="trip in sharedTrips" :key="trip.id" @click="goToTripDetails(trip)">
+                    <IonLabel>
+                        <h2>{{ trip.name }}</h2>
+                        <p>Positions enregistrées : {{ trip.positionCount }}</p>
+                        <p>Date de création : {{ formatDate(trip.createdAt) }}</p>
+                        <p v-if="trip.owner !== currentUserId">Propriétaire : {{ trip.owner }}</p>
+                    </IonLabel>
+                        <IonButton slot="end" @click.stop="shareTrip(trip.id)">Partager</IonButton>
+                    </IonItem>
+                </IonList>
             </IonList>
         </IonContent>
-        <IonFooter>
-            <IonButton color="tertiary" expand="full" @click="fetchCurrentPosition">Get Position</IonButton>
-        </IonFooter>
     </IonPage>
 </template>
 
 <script setup lang="ts">
-    import { IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonItem, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-    import { useGeolocation } from '@/viewmodels/useGeolocation';
-    import { useShowDetails } from '@/viewmodels/useShowDetails';
+    import {IonLabel, IonButton, IonItemDivider, IonButtons, IonContent, IonFooter, IonHeader, IonItem, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 
-    const {positions, fetchCurrentPosition} = useGeolocation();
-    const {showDetails, detailsText, toggleDetails} = useShowDetails()
+
 </script>
 
 

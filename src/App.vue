@@ -1,6 +1,6 @@
 <template>
   <IonApp>
-    <Menu/>
+    <Menu></Menu>
     <IonRouterOutlet id="main-content" />
   </IonApp>
 </template>
