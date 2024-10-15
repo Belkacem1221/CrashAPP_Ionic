@@ -1,2 +1,10 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
+
+.alert-success {
+    --background: #388154; /* Success background */
+  }
+  
+.alert-failure {
+    --background: #911414; /* Failure background */
+}

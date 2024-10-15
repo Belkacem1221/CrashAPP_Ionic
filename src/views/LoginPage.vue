@@ -17,13 +17,13 @@
                     </IonCardContent>
                 </IonCard>
 
-                <!--Appear is form false-->
+                <!--Appear if form false-->
                 <IonAlert
                     :is-open = "isOpen"
-                    header="Fill the fields properly"
                     :message= "messageAlert"
                     :buttons="alertBtn"
-                    @didDismiss="() => setOpen(false)"
+                    :cssClass="alertClass"
+                    @didDismiss="() => setOpen(false, false)"
                 ></IonAlert>
             </IonContent>
     </IonPage>
@@ -35,5 +35,5 @@
     import { useAlert } from '@/viewmodels/useAlert';
 
     const {email, password, handleLogin, navToSignUp} = useLogin()
-    const {isOpen ,setOpen, alertBtn, messageAlert} = useAlert()
+    const {isOpen ,setOpen, alertBtn, messageAlert, alertClass} = useAlert()
 </script>

@@ -1,3 +1,4 @@
+import AddTripPage from '@/views/AddTripPage.vue';
 import GeolocationPage from '@/views/GeolocationPage.vue';
 import LoginPage from '@/views/LoginPage.vue';
 import SignUpPage from '@/views/SignUpPage.vue';
@@ -23,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/geolocation',
     name: 'Geolocation',
     component: GeolocationPage
+  },
+  {
+    path: '/addTrip',
+    name: 'AddTrip',
+    component: AddTripPage
   }
 ]
 
