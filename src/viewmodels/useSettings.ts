@@ -3,7 +3,6 @@ import { UserService } from '@/services/UserService';
 import { authService } from '@/services/authService';
 import { useIonRouter } from "@ionic/vue";
 
-
 export const useSettings = () => {
     const ionRouter = useIonRouter();
     const userId = authService.getLoggedInUserId() || ''; 
@@ -11,18 +10,18 @@ export const useSettings = () => {
     const newPassword = ref('');
     const userInfo = ref({ firstName: '', lastName: '', email: '' });
 
+    const storedUserInfo = authService.getUserInfo();
+    console.log('Stored User Info:', storedUserInfo); 
+    if (storedUserInfo) {
+        userInfo.value = storedUserInfo; 
+    }
+
     const changePassword = async () => {
-            await UserService.changePassword(userId, oldPassword.value, newPassword.value);
-            oldPassword.value = ''; 
-            newPassword.value = '';
-
+        await UserService.changePassword(userId, oldPassword.value, newPassword.value);
+        oldPassword.value = ''; 
+        newPassword.value = '';
     };
 
-    const updateUser = async (firstName: string, lastName: string) => {
-            await UserService.updateUser(userId, firstName, lastName);
-            userInfo.value = { ...userInfo.value, firstName, lastName };
-
-    };
 
     const logout = () => {
         authService.logout(); 
@@ -34,7 +33,6 @@ export const useSettings = () => {
         oldPassword,
         newPassword,
         changePassword,
-        updateUser,
         logout, 
     };
 };

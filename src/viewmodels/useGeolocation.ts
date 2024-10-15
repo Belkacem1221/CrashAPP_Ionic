@@ -58,7 +58,6 @@ export function useGeolocation() {
             //Clean page after send 
             pathName.value = ''
             userId.value = ''
-            recordedPositions.value = []
             console.log('Route Sending success');
         } catch (error) {
             console.error("Route sending failed", error);

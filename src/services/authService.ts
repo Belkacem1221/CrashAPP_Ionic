@@ -15,9 +15,17 @@ export const authService = {
 
         const data = await response.json();
         localStorage.setItem('userId', data.userId);
+        localStorage.setItem('userInfo', JSON.stringify({
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email
+        }));
         return data;
     },
-
+    getUserInfo() {
+        const userInfo = localStorage.getItem('userInfo');
+        return userInfo ? JSON.parse(userInfo) : null;
+    },
 
     async submit(email: string, password: string, firstName: string, lastName: string) {
 
