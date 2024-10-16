@@ -16,6 +16,7 @@ export function useTrip() {
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
     return date.toLocaleString('en-GB', { 
+      timeZone: 'America/Toronto',
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
