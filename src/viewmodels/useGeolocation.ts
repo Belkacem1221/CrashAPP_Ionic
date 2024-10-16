@@ -1,21 +1,29 @@
-// src/viewModels/useGeolocationViewModel.ts
-import { ref, Ref } from 'vue';
-import { getAddressFromCoordinates, getCurrentPosition, sendRouteToServer } from '@/services/GeolocationService';
+import { ref } from 'vue';
+import { getAddressFromCoordinates, getCurrentPosition, sendRouteToServer } from '@/services/GeolocationService'; // Assume these services exist
+import { RouteService,  } from '@/services/RouteService';
 import { Position } from '@capacitor/geolocation';
 import { useAlert } from './useAlert';
+import { authService } from '@/services/authService';
+
+type Trip = {
+    pathName: string;
+    positionsCount: number;
+    createdAt: string;
+    ownerName: string;
+  };
 
 export function useGeolocation() {
+    const { getTripsByUserId } = RouteService;
     const pathName = ref('');
-    const userId = ref('');
+    const userId = authService.getLoggedInUserId() || '';
     const { setOpen } = useAlert();
-
+  
     const recordedPositions = ref<[Position, string][]>([]);
-    const isTracking = ref(false); // Bool if track or no
-    let trackingInterval: ReturnType<typeof setInterval> | null = null; //Timer
-
-    // Start track every 5 seconds
+    const isTracking = ref(false);
+    const trips = ref<Trip[]>([]); // Use the defined Trip type
+    let trackingInterval: ReturnType<typeof setInterval> | null = null;
+    // Start tracking
     const startTracking = () => {
-        //if null run
         if (!trackingInterval) {
             trackingInterval = setInterval(async () => {
                 const position: Position = await getCurrentPosition();
@@ -26,9 +34,8 @@ export function useGeolocation() {
         }
     };
 
-    // Stop track
+    // Stop tracking
     const stopTracking = () => {
-        // if not null run and clear interval
         if (trackingInterval) {
             clearInterval(trackingInterval);
             trackingInterval = null;
@@ -36,7 +43,7 @@ export function useGeolocation() {
         }
     };
 
-    // Toggle start and stop 
+    // Toggle tracking
     const toggleTracking = () => {
         if (isTracking.value) {
             stopTracking();
@@ -45,31 +52,42 @@ export function useGeolocation() {
         }
     };
 
-    // Send recorded route to the server 
+    // Send recorded route to the server
     const sendRoute = async () => {
-        if (!pathName.value || !userId.value) {
+        if (!pathName.value || !userId) {
             console.error('Path Name or User ID is missing');
-            setOpen(true, false); 
+            setOpen(true, 'Path Name or User ID is missing');
             return;
         }
+    
+        const createdAt = new Date().toISOString();
+        const positionsCount = recordedPositions.value.length;
+
         try {
-            await sendRouteToServer(pathName.value, userId.value, recordedPositions.value);
-            setOpen(true, true); 
-            //Clean page after send 
-            pathName.value = ''
-            userId.value = ''
-            console.log('Route Sending success');
+            await sendRouteToServer(
+                pathName.value,
+                userId,
+                recordedPositions.value,
+                positionsCount,
+                createdAt
+            );
+
+            setOpen(true, 'Trip sent successfully!');
+            pathName.value = '';  // Clear trip name after sending
+            recordedPositions.value = [];  // Clear recorded positions
         } catch (error) {
-            console.error("Route sending failed", error);
+            console.error('Failed to send trip', error);
         }
     };
 
-    return {
+    
+    
+      return {
         pathName,
-        userId,
         isTracking,
         recordedPositions,
         toggleTracking,
-        sendRoute
-    };
+        sendRoute,
+        trips,
+      };
 }

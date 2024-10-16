@@ -1,71 +1,54 @@
 <template>
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>My Trips</IonTitle>
-          <IonButtons slot="end">
-            <IonMenuButton></IonMenuButton>
+  <IonPage id="main-content">
+    <IonHeader>
+      <IonToolbar>
+        <IonButtons slot="end">
+          <IonMenuButton></IonMenuButton>
         </IonButtons>
-        </IonToolbar>
-      </IonHeader>
-  
-      <IonContent>
-        <!-- Button to trigger fetch trips -->
-        <IonButton @click="fetchTrips">Show My Trips</IonButton>
-  
-        <IonList>
-          <IonListHeader>
-            <IonLabel>Your Trips</IonLabel>
-          </IonListHeader>
-          <!-- List of Trips -->
-          <IonItemSliding v-for="trip in trips" :key="trip.id">
-            <IonItem @click="viewTripDetails(trip.id)">
-              <IonLabel>
-                <h2>{{ trip.name }}</h2>
-                <p>Created: {{ formatDate(trip.createdAt) }}</p>
-                <p>Positions: {{ trip.positionsCount }}</p>
-              </IonLabel>
-            </IonItem>
-            <IonItemOptions side="end">
-              <IonItemOption color="danger" @click="deleteTrip(trip.id)">
-                Delete
-              </IonItemOption>
-            </IonItemOptions>
-          </IonItemSliding>
-  
-          <IonListHeader>
-            <IonLabel>Shared Trips</IonLabel>
-          </IonListHeader>
-          <!-- Shared Trips -->
-          <IonItemSliding v-for="trip in sharedTrips" :key="trip.id">
-            <IonItem @click="viewTripDetails(trip.id)">
-              <IonLabel>
-                <h2>{{ trip.name }}</h2>
-                <p>Created: {{ formatDate(trip.createdAt) }}</p>
-                <p>Positions: {{ trip.positionsCount }}</p>
-                <p v-if="trip.ownerName">Owner: {{ trip.ownerName }}</p>
-              </IonLabel>
-            </IonItem>
-            <IonItemOptions side="end">
-              <IonItemOption color="danger" @click="deleteTrip(trip.id)">
-                Delete
-              </IonItemOption>
-            </IonItemOptions>
-          </IonItemSliding>
-        </IonList>
-      </IonContent>
-    </IonPage>
-  </template>
-  
-  <script setup lang="ts" >
-    import { IonMenuButton,IonButtons,IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonListHeader, IonItem, IonLabel, IonItemSliding, IonItemOption, IonItemOptions, IonButton } from '@ionic/vue';
-    import { useTrip } from '@/viewmodels/useTrip';  
-    
-    const { trips, sharedTrips, fetchTrips, deleteTrip, formatDate, viewTripDetails } = useTrip();
+        <IonTitle>My Trips</IonTitle>
+      </IonToolbar>
+    </IonHeader>
 
-  </script>
-  
-  <style scoped>
-  /* Add any specific styles here if needed */
-  </style>
-  
+    <IonContent>
+      <IonButton expand="full" @click="fetchTrips">Load Trips</IonButton>
+      <!-- Display a list of trips -->
+      <IonList v-if="trips.length">
+        <IonItem v-for="(trip, index) in trips" :key="index">
+          <IonLabel>
+            <h2>{{ trip.pathName }}</h2>
+            <p>Created at: {{ formatDate(trip.createdAt) }}</p>
+            <p>Number of positions: {{ trip.positionsCount }}</p>
+            <p>Owner: {{ trip.ownerName }}</p>
+          </IonLabel>
+        </IonItem>
+      </IonList>
+
+      <!-- Message when no trips are found -->
+      <div v-else>
+        <p>No trips available.</p>
+      </div>
+    </IonContent>
+  </IonPage>
+</template>
+
+<script setup lang="ts">
+import { IonButton,IonList, IonItem, IonLabel, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { useTrip } from '@/viewmodels/useTrip'; 
+
+const { trips, fetchTrips, formatDate } = useTrip();
+
+
+
+</script>
+
+<style scoped>
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+p {
+  font-size: 14px;
+  margin: 2px 0;
+}
+</style>

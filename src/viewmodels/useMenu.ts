@@ -1,6 +1,8 @@
 import { useIonRouter } from '@ionic/vue';
+import { useAlert } from './useAlert';
 
 export function useMenu() {
+  const {setOpen} = useAlert()
   const ionRouter = useIonRouter();
 
 
@@ -16,14 +18,14 @@ export function useMenu() {
     ionRouter.push('/settings'); 
   };
 
-  const navToAppVersion = () => {
-    ionRouter.push('/appVersion'); 
+  const appVersionAlert = () => {
+    setOpen(true, "Version 1.01")
   };
 
   return {
     navToAddTrip,
     navToTrip,
     navToSettings,
-    navToAppVersion
+    appVersionAlert
 };
 }

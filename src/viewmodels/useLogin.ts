@@ -17,7 +17,7 @@ export function useLogin() {
             ionRouter.push('/geolocation'); 
         } catch (error) {
             console.log("incorrect")
-            setOpen(true, false); 
+            setOpen(true, "Incorrect"); 
             email.value = ""
             password.value = ""
         }

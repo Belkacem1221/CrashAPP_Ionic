@@ -15,9 +15,7 @@
           <IonCardTitle>Informations Route</IonCardTitle>
         </IonCardHeader>
         <IonCardContent>
-            <IonInput v-model="pathName" class="ion-margin-bottom" label="Route" type="text" label-placement="floating" fill="outline" placeholder="Enter Route" required></IonInput>
-            <IonInput v-model="userId"  label="UserID" type="text" label-placement="floating" fill="outline" placeholder="Enter user id" required></IonInput>
-
+            <IonInput v-model="pathName" class="ion-margin-bottom" label="Path name" type="text" label-placement="floating" fill="outline" placeholder="Enter Path name" required></IonInput>
         </IonCardContent>
       </IonCard>
 
@@ -67,8 +65,7 @@
           :is-open = "isOpen"
           :message= "messageAlert"
           :buttons="alertBtn"
-          :cssClass="alertClass"
-          @didDismiss="() => setOpen(false, false)"
+          @didDismiss="() => setOpen(false, messageAlert)"
         ></IonAlert>
     </IonContent>
   </IonPage>
@@ -81,9 +78,9 @@ import { useAlert } from '@/viewmodels/useAlert';
 
 
 
-const { isTracking, recordedPositions, toggleTracking, sendRoute, pathName, userId } = useGeolocation();
+const { isTracking, recordedPositions, toggleTracking, sendRoute, pathName} = useGeolocation();
 
-const {isOpen ,setOpen, alertBtn, messageAlert, alertClass} = useAlert()
+const {isOpen ,setOpen, alertBtn, messageAlert,} = useAlert()
 
 </script>
 
